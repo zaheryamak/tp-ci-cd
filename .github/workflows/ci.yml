@@ -55,7 +55,7 @@ jobs:
       - name: Installer Snyk et scanner les dépendances
         run: |
           npm install -g snyk
-          snyk auth ${{ secrets.SNYK_TOKEN }}
+          snyk auth ${{ secrets.SNYK }}
           snyk test --all-projects
 
       - name: Installer Trivy et scanner l’image Docker
