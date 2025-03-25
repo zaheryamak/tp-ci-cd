@@ -1,6 +1,6 @@
-name: Test Python App
+name: CI/CD Pipeline
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   test:
@@ -15,7 +15,15 @@ jobs:
           python-version: 3.x
 
       - name: Installer les dépendances
-        run: pip install pytest
+        run: pip install -r requirements.txt
 
       - name: Exécuter les tests
         run: python -m unittest test_app.py
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Déclencher le déploiement sur Render
+        run: |
+          curl -X POST "https://api.render.com/deploy/srv-cvhevhpc1ekc73fuk4d0?key=8-s1f-d5ymY"
