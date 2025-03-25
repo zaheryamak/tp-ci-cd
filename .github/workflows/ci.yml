@@ -85,7 +85,7 @@ jobs:
       shell: /usr/bin/bash -e {0}
 
   deploy:
-    needs: security
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Déclencher le déploiement sur Render
