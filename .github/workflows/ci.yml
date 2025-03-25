@@ -37,7 +37,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y curl unzip
-          curl -sS https://downloads.sonarsource.com/sonar-scanner/sonar-scanner-cli-4.6.2.2472-linux.zip -o sonar-scanner.zip
+          curl -sS https://downloads.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-7.1.0.4889-linux-x64.zip -o sonar-scanner.zip
           ls -l sonar-scanner.zip  # Vérifier si le fichier est bien téléchargé
           if [ ! -f sonar-scanner.zip ]; then
             echo "Erreur : Le fichier sonar-scanner.zip n'a pas été téléchargé correctement."
