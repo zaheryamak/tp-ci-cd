@@ -34,12 +34,12 @@ jobs:
             -Dsonar.projectKey=VOTRE_PROJET \
             -Dsonar.sources=. \
             -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=${{ dd66d18a8345b79dcafb6b546bf2c334a83b83d3 }}
+            -Dsonar.login=${{dd66d18a8345b79dcafb6b546bf2c334a83b83d3}}
 
       - name: Installer Snyk et scanner les dépendances
         run: |
           npm install -g snyk
-          snyk auth ${{ abe15f27-086d-41a8-9326-55209a938e7e }}
+          snyk auth ${{abe15f27-086d-41a8-9326-55209a938e7e}}
           snyk test --all-projects
 
       - name: Installer Trivy et scanner l’image Docker
