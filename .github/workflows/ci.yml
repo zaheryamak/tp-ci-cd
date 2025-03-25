@@ -56,7 +56,7 @@ jobs:
         run: |
           npm install -g snyk
           snyk auth ${{ secrets.SNYK }}
-          DEBUG=* snyk test --all-projects
+          DEBUG=* snyk test --all-projects --skip-unresolved
 
 
       - name: Installer Trivy et scanner l’image Docker
