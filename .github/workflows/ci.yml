@@ -38,32 +38,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y curl unzip
           curl -sS https://downloads.sonarsource.com/sonar-scanner/sonar-scanner-cli-4.6.2.2472-linux.zip -o sonar-scanner.zip
-          unzip sonar-scanner.zip
+          ls -l sonar-scanner.zip  # Vérifier si le fichier est bien téléchargé
+          if [ ! -f sonar-scanner.zip ]; then
+            echo "Erreur : Le fichier sonar-scanner.zip n'a pas été téléchargé correctement."
+            exit 1
+          fi
+          unzip sonar-scanner.zip || { echo "Erreur : Échec de l'extraction du fichier"; exit 1; }
           sudo mv sonar-scanner-4.6.2.2472-linux /opt/sonar-scanner
           sudo ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
           sonar-scanner \
-            -Dsonar.organization=VOTRE_ORG \
-            -Dsonar.projectKey=VOTRE_PROJET \
-            -Dsonar.sources=. \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
-
-      - name: Installer Snyk et scanner les dépendances
-        run: |
-          npm install -g snyk
-          snyk auth ${{ secrets.SNYK_TOKEN }}
-          snyk test --all-projects
-
-      - name: Installer Trivy et scanner l’image Docker
-        run: |
-          sudo apt update && sudo apt install -y trivy
-          docker build -t monapp .
-          trivy image monapp
-
-  deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Déclencher le déploiement sur Render
-        run: |
-          curl -X POST "https://api.render.com/deploy/srv-cvhevhpc1ekc73fuk4d0?key=${{ secrets.RENDER_API_KEY }}"
+            -Dsonar.organization=VOT
