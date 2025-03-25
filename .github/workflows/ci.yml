@@ -46,8 +46,8 @@ jobs:
           sudo mv sonar-scanner-7.1.0.4889-linux-x64 /opt/sonar-scanner
           sudo ln -s /opt/sonar-scanner/bin/sonar-scanner /usr/local/bin/sonar-scanner
           sonar-scanner \
-            -Dsonar.organization=VOTRE_ORG \
-            -Dsonar.projectKey=VOTRE_PROJET \
+            -Dsonar.organization=zaheryamak \
+            -Dsonar.projectKey=zaheryamak_tp-ci-cd \
             -Dsonar.sources=. \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.login=${{ secrets.SONAR_TOKEN }}
