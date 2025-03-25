@@ -59,30 +59,30 @@ jobs:
           DEBUG=* snyk test --all-projects --skip-unresolved
 
 
-    - name: Update system and install Trivy
-      run: |
-        # Update package lists
-        sudo apt update
+      - name: Update system and install Trivy
+        run: |
+            # Update package lists
+            sudo apt update
 
-        # Install Snap if it's not installed
-        if ! command -v snap &> /dev/null
-        then
-          sudo apt install -y snapd
-        fi
+            # Install Snap if it's not installed
+            if ! command -v snap &> /dev/null
+            then
+              sudo apt install -y snapd
+            fi
 
-        # Install Trivy using Snap
-        sudo snap install trivy
+            # Install Trivy using Snap
+            sudo snap install trivy
 
-    - name: Build Docker image
-      run: |
-        # Build the Docker image
-        docker build -t monapp .
+      - name: Build Docker image
+        run: |
+            # Build the Docker image
+            docker build -t monapp .
 
-    - name: Run Trivy scan on Docker image
-      run: |
-        # Run the Trivy scan on the Docker image
-        trivy image monapp
-      shell: /usr/bin/bash -e {0}
+      - name: Run Trivy scan on Docker image
+        run: |
+            # Run the Trivy scan on the Docker image
+            trivy image monapp
+        shell: /usr/bin/bash -e {0}
 
   deploy:
     needs: test
