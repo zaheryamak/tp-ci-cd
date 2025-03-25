@@ -26,10 +26,18 @@ jobs:
     steps:
       - name: Récupérer le code
         uses: actions/checkout@v3
-
+        
       - name: Installer SonarQube Scanner
         run: |
-          sonar-scanner \
+         wget -O sonar-scanner.zip https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
+         unzip sonar-scanner.zip
+         sudo mv sonar-scanner-4.7.0.2747-linux /opt/sonar-scanner
+         echo "export PATH=\$PATH:/opt/sonar-scanner/bin" >> ~/.bashrc
+         export PATH=$PATH:/opt/sonar-scanner/bin
+
+      - name: Exécuter SonarQube Scanner
+        run: |
+          /opt/sonar-scanner/bin/sonar-scanner \
             -Dsonar.organization=VOTRE_ORG \
             -Dsonar.projectKey=VOTRE_PROJET \
             -Dsonar.sources=. \
