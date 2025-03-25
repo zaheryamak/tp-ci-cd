@@ -14,6 +14,12 @@ jobs:
         with:
           python-version: 3.x
 
+      - name: Créer un environnement virtuel
+        run: python -m venv venv
+
+      - name: Activer l'environnement virtuel
+        run: . venv/bin/activate
+
       - name: Installer les dépendances
         run: pip install -r requirements.txt
 
@@ -29,6 +35,8 @@ jobs:
 
       - name: Installer SonarQube Scanner
         run: |
+          sudo apt-get update
+          sudo apt-get install -y sonar-scanner
           sonar-scanner \
             -Dsonar.organization=VOTRE_ORG \
             -Dsonar.projectKey=VOTRE_PROJET \
@@ -54,4 +62,4 @@ jobs:
     steps:
       - name: Déclencher le déploiement sur Render
         run: |
-          curl -X POST "https://api.render.com/deploy/srv-cvhevhpc1ekc73fuk4d0?key=8-s1f-d5ymY"
+          curl -X POST "https://api.render.com/deploy/srv-cvhevhpc1ekc73fuk4d0?key=${{ secrets.RENDER_API_KEY }}"
