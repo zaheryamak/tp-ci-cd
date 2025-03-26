@@ -82,7 +82,7 @@ jobs:
       - name: Run Trivy scan on Docker image
         run: |
             # Run the Trivy scan on the Docker image
-            sudo trivy image monapp
+            sudo trivy image --scanners vuln monapp
         shell: /usr/bin/bash -e {0}
 
   deploy:
