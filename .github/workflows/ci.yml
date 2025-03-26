@@ -77,12 +77,12 @@ jobs:
       - name: Build Docker image
         run: |
             # Ensure Dockerfile is in the correct directory, or specify its location
-            docker build -t monapp .
+            sudo docker build -t monapp .
 
       - name: Run Trivy scan on Docker image
         run: |
             # Run the Trivy scan on the Docker image
-            trivy image monapp
+            sudo trivy image monapp
         shell: /usr/bin/bash -e {0}
 
   deploy:
