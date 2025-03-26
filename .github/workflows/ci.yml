@@ -58,7 +58,7 @@ jobs:
         run: |
           npm install -g snyk
           snyk auth ${{ secrets.SNYK }}
-          DEBUG=* snyk test --all-projects --skip-unresolved
+          DEBUG=* snyk test --all-projects 
 
   deploy:
     needs: security
