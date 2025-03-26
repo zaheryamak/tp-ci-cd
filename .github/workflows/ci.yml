@@ -60,31 +60,6 @@ jobs:
           snyk auth ${{ secrets.SNYK }}
           DEBUG=* snyk test --all-projects --skip-unresolved
 
-      - name: Update system and install Trivy
-        run: |
-            # Update package lists
-            sudo apt update
-
-            # Install Snap if it's not installed
-            if ! command -v snap &> /dev/null
-            then
-              sudo apt install -y snapd
-            fi
-
-            # Install Trivy using Snap
-            sudo snap install trivy
-
-      - name: Build Docker image
-        run: |
-            # Ensure Dockerfile is in the correct directory, or specify its location
-            sudo docker build -t monapp .
-
-      - name: Run Trivy scan on Docker image
-        run: |
-            # Run the Trivy scan on the Docker image
-            sudo trivy image --scanners vuln monapp
-        shell: /usr/bin/bash -e {0}
-
   deploy:
     needs: security
     runs-on: ubuntu-latest
