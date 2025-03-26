@@ -43,12 +43,13 @@ jobs:
             -Dsonar.sources=.
             -Dsonar.host.url=https://sonarcloud.io
 
-      - name: Scanner avec Snyk
-        uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK }}
-        with:
-          args: --all-projects
+    - name: Scanner avec Snyk (Python)
+      uses: snyk/actions/python@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK }}
+      with:
+        args: --all-projects
+
 
   deploy:
     needs: security
